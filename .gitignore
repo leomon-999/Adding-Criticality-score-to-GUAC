@@ -1,0 +1,13 @@
+*.dll
+*.dylib
+*.exe
+*.exe~
+*.out
+*.so
+*.test
+bin/
+coverage.txt
+go.work
+.idea
+*.DS_Store
+*pkg/.DS_Store

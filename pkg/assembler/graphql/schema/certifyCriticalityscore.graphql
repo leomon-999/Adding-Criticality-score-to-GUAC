@@ -1,0 +1,75 @@
+#
+# Copyright 2023 The GUAC Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# NOTE: This is experimental and might change in the future!
+
+# Defines a GraphQL schema to certify Criticalityscore for a source repository.
+
+"""
+CertifyCriticalityscore is an attestation which represents the criticalityscore of a
+particular source repository.
+"""
+type CertifyCriticalityscore {
+  "The source repository that is being scanned (attestation subject)"
+  source: Source!
+  "The Criticalityscore attached to the repository (attestation object)"
+  criticalityscore: Criticalityscore!
+}
+
+"""
+Criticalityscore contains all of the fields present in a Criticalityscore attestation.
+
+We also include fields to specify under what conditions the check was performed
+(time of scan, version of scanners, etc.) as well as how this information got
+included into GUAC (origin document and the collector for that document).
+"""
+type Criticalityscore {
+  "Overall Criticalityscore score for the source"
+  defaultScore: String!
+  "Exact timestamp when the source was last scanned"
+  timeScanned: String!
+  legacyCommitFrequency: Int!
+  legacyContributorCount: Int!
+  legacyRecentReleaseCount: Int!
+  legacyUpdatedIssuesCount: Int!
+  repoStarCount: Int!
+  "Document from which this attestation is generated from"
+  origin: String!
+  "GUAC collector for the document"
+  collector: String!
+}
+
+
+"""
+CertifyCriticalityscoreSpec allows filtering the list of CertifyCriticalityscore to return.
+"""
+input CertifyCriticalityscoreSpec {
+  source: SourceSpec
+  timeScanned: String
+  defaultScore: String
+  legacyCommitFrequency: Int!
+  legacyContributorCount: Int!
+  legacyRecentReleaseCount: Int!
+  legacyUpdatedIssuesCount: Int!
+  repoStarCount: Int!
+  origin: String
+  collector: String
+}
+
+
+extend type Query {
+  "Returns all Criticalityscore certifications matching the filter"
+  Criticalityscore(criticalityscoreSpec: CertifyCriticalityscoreSpec): [CertifyCriticalityscore!]!
+}

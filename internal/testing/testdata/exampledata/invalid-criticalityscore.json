@@ -1,0 +1,23 @@
+{
+    "default_score":"0.26270",
+    "legacy":{
+        "closed_issues_count":0,
+        "commit_frequency":0,
+        "contributor_count":24,
+        "created_since":32,
+        "github_mention_count":0,
+        "issue_comment_frequency":0,
+        "org_count":0,
+        "recent_release_count":6,
+        "updated_issues_count":0,
+        "updated_since":12
+    },
+    "repo":{
+        "created_at":"2020-08-25T10:59:23Z",
+        "language":"C++",
+        "license":"",
+        "star_count":0,
+        "updated_at":"2022-04-27T14:09:35Z",
+        "url":"https://github.com/laiyoufafa/aafwk_aafwk_lite"
+    }
+}

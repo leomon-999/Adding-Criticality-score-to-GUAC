@@ -1,0 +1,43 @@
+fragment allCertifyCriticalityscore on CertifyCriticalityscore {
+  source {
+    type
+    namespaces {
+      namespace
+      names {
+        name
+        tag
+        commit
+      }
+    }
+  }
+  timeScanned
+  defaultScore
+  legacyCommitFrequency
+  legacyContributorCount
+  legacyRecentReleaseCount
+  legacyUpdatedIssuesCount
+  repoStarCount
+  origin
+  collector
+}
+
+query Q1 {
+  CertifyCriticalityscore(certifyCriticalityscoreSpec: {}) {
+    ...allCertifyCriticalityscore
+  }
+}
+
+query Q2 {
+  CertifyCriticalityscore(certifyCriticalityscoreSpec: {origin: "testing backend"}) {
+    ...allCertifyCriticalityscore
+  }
+}
+
+query Q3 {
+  CertifyCriticalityscore(
+    certifyCriticalityscoreSpec: {source: {name: "https://github.com/laiyoufafa/aafwk_aafwk_lite"}}
+  ) {
+    ...allCertifyCriticalityscore
+  }
+}
+
