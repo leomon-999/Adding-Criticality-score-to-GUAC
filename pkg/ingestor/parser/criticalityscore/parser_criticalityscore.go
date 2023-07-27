@@ -7,7 +7,7 @@ import (
 
 	"github.com/guacsec/guac/pkg/assembler"
 	"github.com/guacsec/guac/pkg/handler/processor"
-	cs "github.com/guacsec/guac/pkg/handler/processor/criticality_score"
+	cs "github.com/guacsec/guac/pkg/handler/processor/criticalityscore"
 	"github.com/guacsec/guac/pkg/ingestor/parser/common"
 )
 

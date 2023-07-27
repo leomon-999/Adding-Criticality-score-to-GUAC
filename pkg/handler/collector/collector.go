@@ -41,7 +41,7 @@ type Collector interface {
 	Type() string
 }
 
-// Emitter processes a document
+// Emitter processes a document 发射器处理文档
 type Emitter func(*processor.Document) error
 
 // ErrHandler processes an error and returns a boolean representing if

@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 
 	"github.com/guacsec/guac/pkg/handler/processor"
-	cs "github.com/guacsec/guac/pkg/handler/processor/criticality_score"
+	cs "github.com/guacsec/guac/pkg/handler/processor/criticalityscore"
 )
 
 type criticalityscoreTypeGuesser struct{}

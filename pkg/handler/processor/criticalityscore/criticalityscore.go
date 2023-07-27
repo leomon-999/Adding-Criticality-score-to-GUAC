@@ -42,6 +42,6 @@ func (p *CriticalityscoreProcessor) Unpack(d *processor.Document) ([]*processor.
 		return nil, fmt.Errorf("expected document type: %v, actual document type: %v", processor.DocumentCriticalityscore, d.Type)
 	}
 
-	// Scorecard doesn't unpack into additional documents at the moment.
+	// Criticalityscore doesn't unpack into additional documents at the moment.
 	return []*processor.Document{}, nil
 }
