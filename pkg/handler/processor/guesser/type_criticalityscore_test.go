@@ -7,6 +7,7 @@ import (
 	"github.com/guacsec/guac/pkg/handler/processor"
 )
 
+// 测试文档类型猜测方法
 func Test_criticalityscoreTypeGuesser_GuessDocumentType(t *testing.T) {
 	testCases := []struct {
 		name     string

@@ -34,7 +34,7 @@ type scorecardParser struct {
 	artifactNodes []assembler.ArtifactNode
 }
 
-// NewSLSAParser initializes the slsaParser
+// NewScorecardParser initializes the scorecardParser
 func NewScorecardParser() common.DocumentParser {
 	return &scorecardParser{
 		scorecardNodes: []assembler.MetadataNode{},

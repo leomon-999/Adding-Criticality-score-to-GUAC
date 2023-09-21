@@ -9,6 +9,7 @@ import (
 
 type criticalityscoreTypeGuesser struct{}
 
+// 文档类型猜测
 func (_ *criticalityscoreTypeGuesser) GuessDocumentType(blob []byte, format processor.FormatType) processor.DocumentType {
 	var criticalityscore cs.JSONCriticalityScoreResult
 	if json.Unmarshal(blob, &criticalityscore) == nil && format == processor.FormatJSON {

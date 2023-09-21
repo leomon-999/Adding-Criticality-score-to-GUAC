@@ -10,6 +10,7 @@ import (
 type CriticalityscoreProcessor struct {
 }
 
+// 对criticalityscore的json数据结果进行验证
 func (p *CriticalityscoreProcessor) ValidateSchema(d *processor.Document) error {
 	if d.Type != processor.DocumentCriticalityscore {
 		return fmt.Errorf("expected document type: %v, actual document type: %v", processor.DocumentCriticalityscore, d.Type)

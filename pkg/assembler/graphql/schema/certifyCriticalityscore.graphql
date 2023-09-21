@@ -40,7 +40,7 @@ type Criticalityscore {
   defaultScore: String!
   "Exact timestamp when the source was last scanned"
   timeScanned: String!
-  legacyCommitFrequency: Int!
+  legacyCommitFrequency: Float!
   legacyContributorCount: Int!
   legacyRecentReleaseCount: Int!
   legacyUpdatedIssuesCount: Int!
@@ -59,7 +59,7 @@ input CertifyCriticalityscoreSpec {
   source: SourceSpec
   timeScanned: String
   defaultScore: String
-  legacyCommitFrequency: Int!
+  legacyCommitFrequency: Float!
   legacyContributorCount: Int!
   legacyRecentReleaseCount: Int!
   legacyUpdatedIssuesCount: Int!

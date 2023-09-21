@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
 
 	"github.com/guacsec/guac/pkg/assembler"
 	"github.com/guacsec/guac/pkg/handler/processor"
@@ -27,6 +28,7 @@ func NewCriticalityscoreParser() common.DocumentParser {
 }
 
 // Parse breaks out the document into the graph components
+// Parse方法将文档分解为图形组件
 func (p *criticalityscoreParser) Parse(ctx context.Context, doc *processor.Document) error {
 
 	if doc.Type != processor.DocumentCriticalityscore {
@@ -61,7 +63,7 @@ func (p *criticalityscoreParser) CreateNodes(ctx context.Context) []assembler.Gu
 
 // CreateEdges creates the GuacEdges that form the relationship for the graph inputs
 func (p *criticalityscoreParser) CreateEdges(ctx context.Context, foundIdentities []assembler.IdentityNode) []assembler.GuacEdge {
-	// TODO: handle identity for edges (https://github.com/guacsec/guac/issues/128)
+
 	edges := []assembler.GuacEdge{}
 	for i, s := range p.criticalityscoreNodes {
 		edges = append(edges, assembler.MetadataForEdge{
@@ -77,17 +79,23 @@ func (p *criticalityscoreParser) GetIdentities(ctx context.Context) []assembler.
 	return nil
 }
 
+// 构建元数据ID
 func metadataId(s *cs.JSONCriticalityScoreResult) string {
 	return fmt.Sprintf("%v:%v", s.Repo.URL[len("https://"):len(s.Repo.URL)], s.Repo.License)
 }
 
+// 构建元数据节点
 func getMetadataNode(s *cs.JSONCriticalityScoreResult) assembler.MetadataNode {
 	mnNode := assembler.MetadataNode{
 		MetadataType: "criticalityscore",
 		ID:           metadataId(s),
 		Details:      map[string]interface{}{},
 	}
-
+	//转换数据结果类型为float
+	score, err := strconv.ParseFloat(s.DefaultScore, 64)
+	if err != nil {
+	}
+	//设置数据
 	mnNode.Details["repo"] = sourceUri(s.Repo.URL)
 	mnNode.Details["language"] = s.Repo.Language
 	mnNode.Details["star_count"] = s.Repo.StarCount
@@ -98,21 +106,25 @@ func getMetadataNode(s *cs.JSONCriticalityScoreResult) assembler.MetadataNode {
 	mnNode.Details["recent_release_count"] = s.Legacy.RecentReleaseCount
 	mnNode.Details["org_count"] = s.Legacy.OrgCount
 	mnNode.Details["updated_issues_count"] = s.Legacy.UpdatedIssuesCount
-	mnNode.Details["score"] = s.DefaultScore
+	mnNode.Details["score"] = score * 10
 
 	return mnNode
 }
 
+// 获取工件节点
 func getArtifactNode(s *cs.JSONCriticalityScoreResult) assembler.ArtifactNode {
 	return assembler.ArtifactNode{
-		Name: sourceUri(s.Repo.URL),
+		Name:   sourceUri(s.Repo.URL),
+		Digest: "",
 	}
 }
 
+// 设置uri
 func sourceUri(s string) string {
 	return "git+" + s
 }
 
+// 获取识别器
 func (p *criticalityscoreParser) GetIdentifiers(ctx context.Context) (*common.IdentifierStrings, error) {
 	return nil, fmt.Errorf("not yet implemented")
 }

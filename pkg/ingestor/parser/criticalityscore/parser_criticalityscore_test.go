@@ -11,6 +11,7 @@ import (
 	"github.com/guacsec/guac/pkg/logging"
 )
 
+// 测试方法，设置模拟数据
 func Test_criticalityscoreParser(t *testing.T) {
 	ctx := logging.WithLogger(context.Background())
 	tests := []struct {
@@ -42,7 +43,7 @@ func Test_criticalityscoreParser(t *testing.T) {
 					"org_count":               0,
 					"recent_release_count":    6,
 					"updated_issues_count":    0,
-					"score":                   "0.26270",
+					"score":                   2.627,
 				},
 			},
 			assembler.ArtifactNode{
@@ -65,7 +66,7 @@ func Test_criticalityscoreParser(t *testing.T) {
 						"org_count":               0,
 						"recent_release_count":    6,
 						"updated_issues_count":    0,
-						"score":                   "0.26270",
+						"score":                   2.627,
 					},
 				},
 				ForArtifact: assembler.ArtifactNode{
@@ -75,6 +76,7 @@ func Test_criticalityscoreParser(t *testing.T) {
 		},
 		wantErr: false,
 	}}
+	//调用方法进行测试
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			s := NewCriticalityscoreParser()

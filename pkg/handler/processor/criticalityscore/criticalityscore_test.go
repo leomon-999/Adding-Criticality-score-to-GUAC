@@ -8,6 +8,7 @@ import (
 	"github.com/guacsec/guac/pkg/handler/processor"
 )
 
+// 测试unpack方法
 func TestCriticalityscoreProcessor_Unpack(t *testing.T) {
 	testCases := []struct {
 		name      string
@@ -49,6 +50,7 @@ func TestCriticalityscoreProcessor_Unpack(t *testing.T) {
 	}
 }
 
+// 测试验证方法
 func TestCriticalityscoreProcessor_ValidateSchema(t *testing.T) {
 	testCases := []struct {
 		name      string

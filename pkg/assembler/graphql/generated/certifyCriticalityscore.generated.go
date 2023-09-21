@@ -582,7 +582,7 @@ func (ec *executionContext) unmarshalInputCertifyCriticalityscoreSpec(ctx contex
 			var err error
 
 			ctx := graphql.WithPathContext(ctx, graphql.NewPathWithField("legacyCommitFrequency"))
-			it.LegacyCommitFrequency, err = ec.unmarshalOInt2ᚖint(ctx, v)
+			it.LegacyCommitFrequency, err = ec.unmarshalOFloat2ᚖfloat64(ctx, v)
 			if err != nil {
 				return it, err
 			}

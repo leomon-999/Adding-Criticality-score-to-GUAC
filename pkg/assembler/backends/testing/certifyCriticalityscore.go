@@ -7,6 +7,7 @@ import (
 	"github.com/guacsec/guac/pkg/assembler/graphql/model"
 )
 
+// 注册所有认证关键度分数
 func registerAllCertifyCriticalityscore(client *demoClient) error {
 	// "git", "github", "https://github.com/laiyoufafa/aafwk_aafwk_lite", "tag=3.1.1"
 	selectedSourceType := "git"
@@ -27,8 +28,7 @@ func registerAllCertifyCriticalityscore(client *demoClient) error {
 }
 
 // Ingest CertifyCriticalityscore
-
-func (c *demoClient) registerCertifyCriticalityscore(selectedSource *model.Source, timeScanned time.Time, defaultScore string, legacyCommitFrequency, legacyContributorCount, legacyRecentReleaseCount, legacyUpdatedIssuesCount, repoStarCount int) error {
+func (c *demoClient) registerCertifyCriticalityscore(selectedSource *model.Source, timeScanned time.Time, defaultScore string, legacyCommitFrequency float64, legacyContributorCount, legacyRecentReleaseCount, legacyUpdatedIssuesCount, repoStarCount int) error {
 	for _, h := range c.certifyCriticalityscore {
 		if h.Source == selectedSource &&
 			h.Criticalityscore.DefaultScore == defaultScore &&
@@ -61,7 +61,6 @@ func (c *demoClient) registerCertifyCriticalityscore(selectedSource *model.Sourc
 }
 
 // Query CertifyCriticalityscore
-
 func (c *demoClient) Criticalityscore(ctx context.Context, certifyCriticalityscoreSpec *model.CertifyCriticalityscoreSpec) ([]*model.CertifyCriticalityscore, error) {
 	var collectedHasSourceAt []*model.CertifyCriticalityscore
 

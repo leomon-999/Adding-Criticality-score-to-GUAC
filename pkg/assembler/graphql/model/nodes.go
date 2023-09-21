@@ -177,7 +177,7 @@ type CertifyCriticalityscoreSpec struct {
 	TimeScanned      *string               `json:"timeScanned"`
 	DefaultScore     *string     `json:"defaultScore"`
 	//提交次数
-	LegacyCommitFrequency      *int     `json:"legacyCommitFrequency"`
+	LegacyCommitFrequency      *float64     `json:"legacyCommitFrequency"`
 	//贡献者数量
 	LegacyContributorCount     *int     `json:"legacyContributorCount"` 
 	//最近发布的数量
@@ -776,7 +776,7 @@ type Criticalityscore struct {
 	// Overall Criticalityscore score for the source
 	DefaultScore string     `json:"defaultScore"`
 	//提交次数
-	LegacyCommitFrequency      int     `json:"legacyCommitFrequency"`
+	LegacyCommitFrequency      float64     `json:"legacyCommitFrequency"`
 	//贡献者数量
 	LegacyContributorCount     int     `json:"legacyContributorCount"` 
 	//最近发布的数量

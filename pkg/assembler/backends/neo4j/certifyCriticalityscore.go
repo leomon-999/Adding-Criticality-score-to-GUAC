@@ -12,8 +12,10 @@ import (
 )
 
 const (
+	//扫描时间
 	csTimeScanned string = "csTimeScanned"
-	defaultScore  string = "defaultScore"
+	//得分
+	defaultScore string = "defaultScore"
 	//提交次数
 	legacyCommitFrequency string = "legacyCommitFrequency"
 	//贡献者数量
@@ -26,6 +28,7 @@ const (
 	repoStarCount string = "repoStarCount"
 )
 
+// 将Criticalityscore和neo4j客户端建立联系
 func (c *neo4jClient) Criticalityscore(ctx context.Context, certifyCriticalityscoreSpec *model.CertifyCriticalityscoreSpec) ([]*model.CertifyCriticalityscore, error) {
 	session := c.driver.NewSession(neo4j.SessionConfig{AccessMode: neo4j.AccessModeRead})
 	defer session.Close()
@@ -89,10 +92,11 @@ func (c *neo4jClient) Criticalityscore(ctx context.Context, certifyCriticalitysc
 					return nil, gqlerror.Errorf("certifyCriticalityscore Node not found in neo4j")
 				}
 
+				//设置数据类型
 				criticalityscore := model.Criticalityscore{
 					TimeScanned:              certifyCriticalityscoreNode.Props[timeScanned].(string),
 					DefaultScore:             certifyCriticalityscoreNode.Props[defaultScore].(string),
-					LegacyCommitFrequency:    certifyCriticalityscoreNode.Props[legacyCommitFrequency].(int),
+					LegacyCommitFrequency:    certifyCriticalityscoreNode.Props[legacyCommitFrequency].(float64),
 					LegacyContributorCount:   certifyCriticalityscoreNode.Props[legacyContributorCount].(int),
 					LegacyRecentReleaseCount: certifyCriticalityscoreNode.Props[legacyRecentReleaseCount].(int),
 					LegacyUpdatedIssuesCount: certifyCriticalityscoreNode.Props[legacyUpdatedIssuesCount].(int),
@@ -121,6 +125,7 @@ func (c *neo4jClient) Criticalityscore(ctx context.Context, certifyCriticalitysc
 	return result.([]*model.CertifyCriticalityscore), nil
 }
 
+// 设置验证criticcalityscore的值
 func setCertifyCriticalityscoreValues(sb *strings.Builder, certifyCriticalityscoreSpec *model.CertifyCriticalityscoreSpec, firstMatch *bool, queryValues map[string]any) {
 	if certifyCriticalityscoreSpec.TimeScanned != nil {
 		matchProperties(sb, *firstMatch, "certifyCriticalityscore", timeScanned, "$"+timeScanned)
